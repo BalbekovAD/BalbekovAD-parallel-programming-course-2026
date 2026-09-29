@@ -1,0 +1,41 @@
+{
+  "config": {
+    "collectorType": "DOUBLE_BUFFER",
+    "inputSize": 1048576,
+    "singleRunTime": "PT5S",
+    "maxThreads": 2,
+    "consistencyTestThreads": 2,
+    "consistencyIterations": 2500,
+    "repeats": 5,
+    "seed": 42
+  },
+  "results": {
+    "1": {
+      "warmupOps": 185034.8620826774,
+      "ops": [
+        184637.2728560923,
+        178433.86031136484,
+        178196.0839266734,
+        178684.91932835957,
+        151446.03555641347
+      ]
+    },
+    "2": {
+      "warmupOps": 268022.2903735507,
+      "ops": [
+        351072.11090163863,
+        342719.48268416704,
+        349512.49202149536,
+        343471.9645045171,
+        310484.54887886066
+      ]
+    }
+  },
+  "consistencyTestResults": {
+    "counts": {
+      "CONSISTENT": 2500
+    },
+    "finalExpectedCount": 787705,
+    "finalActualCount": 787705
+  }
+}

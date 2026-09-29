@@ -1,0 +1,41 @@
+{
+  "config": {
+    "collectorType": "THREAD_LOCAL",
+    "inputSize": 1048576,
+    "singleRunTime": "PT5S",
+    "maxThreads": 2,
+    "consistencyTestThreads": 2,
+    "consistencyIterations": 2500,
+    "repeats": 5,
+    "seed": 42
+  },
+  "results": {
+    "1": {
+      "warmupOps": 308358.21384541155,
+      "ops": [
+        289944.6529426059,
+        276026.5588683205,
+        266293.95512381115,
+        281999.60070926894,
+        271032.8834590666
+      ]
+    },
+    "2": {
+      "warmupOps": 563111.0281018965,
+      "ops": [
+        553062.9480680084,
+        559733.5910078252,
+        558054.5241012159,
+        548163.4151707146,
+        485323.7930069093
+      ]
+    }
+  },
+  "consistencyTestResults": {
+    "counts": {
+      "CONSISTENT": 2500
+    },
+    "finalExpectedCount": 929852,
+    "finalActualCount": 0
+  }
+}

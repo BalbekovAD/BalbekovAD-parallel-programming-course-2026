@@ -1,0 +1,16 @@
+product: jvm/app
+settings:
+  kotlin:
+    serialization: json
+repositories:
+  - "https://packages.jetbrains.team/maven/p/kds/kotlin-ds-maven"
+dependencies:
+  - "org.apache.commons:commons-math3:3.6.1"
+  - "org.jetbrains.kotlinx:kandy-lets-plot:0.8.3"
+  - "org.jetbrains.kotlinx:kotlin-statistics-jvm:0.8.3"
+  - "com.github.ajalt.clikt:clikt:5.1.0"
+#  - "org.jetbrains.kotlinx:kotlinx-io-core:0.9.1"
+  - "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0"
+  - "io.arrow-kt:arrow-fx-coroutines:2.2.3"
+test-dependencies:
+  - "org.jetbrains.lincheck:lincheck:3.7"
