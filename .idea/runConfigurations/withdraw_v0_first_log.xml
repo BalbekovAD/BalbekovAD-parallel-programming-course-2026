@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="withdraw-v0 first log" type="Amper.Run">
+    <option name="command" value="run" />
+    <EXTENSION ID="amper.run.common">
+      <option name="applicationArguments" value="withdraw-v0 first log" />
+      <option name="module" value="student-java" />
+    </EXTENSION>
+    <EXTENSION ID="amper.run.jvm">
+      <option name="mainClass" enabled="true" value="lab2.Main" />
+    </EXTENSION>
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,5 +1,9 @@
 package lab2;
 
+import lab2.solution.SchedLock;
+import lab2.solution.Scheduler;
+import lab2.solution.Shared;
+
 import java.util.*;
 import java.util.function.Supplier;
 

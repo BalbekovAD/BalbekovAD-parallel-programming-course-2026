@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GHAISettings"><![CDATA[{}]]></component>
+  <component name="J2kLlmSettings">
+    <option name="modelId" value="byok:Ollama/qwen2.5-coder:7b-base-q4_K_M" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_26" default="true" project-jdk-name="openjdk-26" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

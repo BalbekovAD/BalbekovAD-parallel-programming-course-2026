@@ -1,5 +1,12 @@
 package lab2;
 
+import lab2.solution.Dfs;
+import lab2.solution.FirstAlive;
+import lab2.solution.RandomPick;
+import lab2.solution.Replay;
+import lab2.solution.Scheduler;
+import lab2.solution.Strategy;
+
 import java.util.function.Supplier;
 
 /** lab2 <target> <strategy> [arg]
@@ -11,12 +18,12 @@ public final class Main {
     static Outcome runOnce(Supplier<Targets.Target> factory, Strategy st, boolean log) {
         Scheduler s = new Scheduler();
         Targets.Target t = factory.get();
-        s.logging = log;
+        s.setLogging(log);
         t.setup(s);
         st.beginRun();
         s.run(st);
-        if (log) s.log.forEach(l -> System.out.println("  " + l));
-        String failure = s.deadlock != null ? "DEADLOCK " + s.deadlock : t.check();
+        if (log) s.getLog().forEach(l -> System.out.println("  " + l));
+        String failure = s.getDeadlock() != null ? "DEADLOCK " + s.getDeadlock() : t.check();
         return new Outcome(s.traceString(), failure);
     }
 
@@ -26,7 +33,7 @@ public final class Main {
     }
 
     static void explore(Supplier<Targets.Target> f, int bound) {
-        Strategies.Dfs dfs = new Strategies.Dfs(bound);
+        Dfs dfs = new Dfs(bound);
         long t0 = System.nanoTime();
         int explored = 0, fail = 0;
         Outcome first = null;
@@ -43,16 +50,16 @@ public final class Main {
     static void randoms(Supplier<Targets.Target> f, int count) {
         int fail = 0; long firstSeed = -1;
         for (long seed = 0; seed < count; seed++) {
-            Outcome o = runOnce(f, new Strategies.RandomPick(seed), false);
+            Outcome o = runOnce(f, new RandomPick(seed), false);
             if (o.failure != null) { fail++; if (firstSeed < 0) firstSeed = seed; }
         }
         System.out.printf("random: %d seeds, %d fail (%.1f%%)%n", count, fail, 100.0 * fail / count);
         if (firstSeed >= 0) {
-            Outcome o = runOnce(f, new Strategies.RandomPick(firstSeed), false);
+            Outcome o = runOnce(f, new RandomPick(firstSeed), false);
             System.out.println("first failing seed " + firstSeed + ": " + o.trace + " -> " + o.failure);
             int same = 0;
             for (int i = 0; i < 10; i++) {
-                Outcome r = runOnce(f, new Strategies.Replay(o.trace), false);
+                Outcome r = runOnce(f, new Replay(o.trace), false);
                 if (r.trace.equals(o.trace) && o.failure.equals(r.failure)) same++;
             }
             System.out.println("replay " + o.trace + ": same failure " + same + "/10");
@@ -64,9 +71,9 @@ public final class Main {
         Supplier<Targets.Target> f = Targets.byName(a[0]);
         boolean log = a[a.length - 1].equals("log");
         switch (a[1]) {
-            case "first" -> single(f, new Strategies.FirstAlive(), log);
-            case "random" -> single(f, new Strategies.RandomPick(Long.parseLong(a[2])), log);
-            case "replay" -> single(f, new Strategies.Replay(a[2]), log);
+            case "first" -> single(f, FirstAlive.INSTANCE, log);
+            case "random" -> single(f, new RandomPick(Long.parseLong(a[2])), log);
+            case "replay" -> single(f, new Replay(a[2]), log);
             case "randoms" -> randoms(f, Integer.parseInt(a[2]));
             case "dfs" -> explore(f, Integer.MAX_VALUE);
             case "bounded" -> explore(f, Integer.parseInt(a[2]));
